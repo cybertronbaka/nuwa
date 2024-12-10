@@ -7,19 +7,20 @@ class ConnectController{
 
   final Ref ref;
 
-  Future<void> connect(BuildContext context){
+  Future<void> connect(BuildContext context) async {
     final statusNotifier = ref.read(pencilConnectionStatusProvider.notifier);
     statusNotifier.state = PencilConnectionStatus.connecting;
-    return ref.read(pencilRepoProvider).connect().then((_){
+    try{
+      await ref.read(pencilRepoProvider).connect();
       debugPrint('Connected');
       statusNotifier.state = PencilConnectionStatus.connected;
-    }).onError((e, stacktrace){
+    } catch(e){
       debugPrint('Failed to connect');
       statusNotifier.state = PencilConnectionStatus.disconnected;
       if(context.mounted){
         CustomSnackBar.showErrorNotification(context, e.toString());
       }
-    });
+    }
   }
 
   void navigateToWrite(BuildContext context){

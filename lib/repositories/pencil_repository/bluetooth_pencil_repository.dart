@@ -1,14 +1,17 @@
 part of 'pencil_repository.dart';
 
 class BluetoothPencilRepository extends PencilRepository{
+  BluetoothPencilRepository(super.ref);
+
   @override
   Future<void> connect() async {
+    final bluePlus = ref.read(flutterBluePlusProvider);
     await _checkIfSupported();
     await _turnOn();
     List<BluetoothDevice> scannedDevices = [];
 
     // Listen to scan stream and add each discovered device to list
-    FlutterBluePlus.scanResults.listen((List<ScanResult> results) {
+    bluePlus.scanResults.listen((List<ScanResult> results) {
       for (final result in results) {
         final device = result.device;
         if (!scannedDevices.contains(device)) {
@@ -18,9 +21,9 @@ class BluetoothPencilRepository extends PencilRepository{
       }
     });
 
-    await FlutterBluePlus.startScan();
+    await bluePlus.startScan();
     await Future.delayed(const Duration(seconds: 15));
-    await FlutterBluePlus.stopScan();
+    await bluePlus.stopScan();
     debugPrint('stopped');
     for(var device in scannedDevices){
       debugPrint('******${device.advName}');
@@ -29,17 +32,19 @@ class BluetoothPencilRepository extends PencilRepository{
   }
 
   Future<void> _checkIfSupported() async {
-    if (await FlutterBluePlus.isSupported == false) {
+    final bluePlus = ref.read(flutterBluePlusProvider);
+    if (await bluePlus.isSupported == false) {
       throw BluetoothNotSupported();
     }
   }
 
   Future<void> _turnOn([bool throwError = false]) async{
-    if(FlutterBluePlus.adapterStateNow == BluetoothAdapterState.on) return;
+    final bluePlus = ref.read(flutterBluePlusProvider);
+    if(bluePlus.adapterStateNow == BluetoothAdapterState.on) return;
 
     var failedToTurnOn = false;
     try {
-      await FlutterBluePlus.turnOn();
+      await bluePlus.turnOn();
     } catch(_){
       failedToTurnOn = true;
     }
@@ -48,7 +53,8 @@ class BluetoothPencilRepository extends PencilRepository{
 
   @override
   Future<Stream<BluetoothAdapterState>> state() async {
+    final bluePlus = ref.read(flutterBluePlusProvider);
     await _turnOn();
-    return FlutterBluePlus.adapterState;
+    return bluePlus.adapterState;
   }
 }

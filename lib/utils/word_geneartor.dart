@@ -3,7 +3,7 @@ import 'dart:math';
 var _index = 0;
 
 abstract class WordGenerator {
-  static const List<String> _words = [
+  static const List<String> words = [
     'apple',
     'banana',
     'cherry',
@@ -34,10 +34,10 @@ abstract class WordGenerator {
 
   static String generate() {
     final random = Random();
-    var index = random.nextInt(_words.length);
+    var index = random.nextInt(words.length);
     while(index == _index){
-      index = random.nextInt(_words.length);
+      index = random.nextInt(words.length);
     }
-    return _words[index];
+    return words[index];
   }
 }

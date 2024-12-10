@@ -1,9 +1,9 @@
 part of 'states.dart';
 
-final randomWordProvider = StateProvider.autoDispose<String?>((ref) => null);
+final randomWordProvider = StateProvider<String?>((ref) => null);
 
-final canvasSizeProvider = StateProvider.autoDispose<Size?>(
+final canvasSizeProvider = StateProvider<Size?>(
     (ref) => null);
-final prevCanvasSizeProvider = StateProvider.autoDispose<Size?>(
+final prevCanvasSizeProvider = StateProvider<Size?>(
         (ref) => null);
 final pointsProvider = StateProvider<List<DrawnPoint?>>((ref) => []);

@@ -28,17 +28,20 @@ class WriteController{
 
     final pdf = PdfGenerator.generate(canvasSize, points);
     final fileName = '${now.day}-${now.month}-${now.year} ${now.hour}-${now.minute}-${now.second}.pdf';
-    return FileUtils.writeFile(await pdf.save(), fileName).then((file){
-      debugPrint('File exported to $file');
-      if(context.mounted){
-        CustomSnackBar.showSuccessNotification(context, 'File downloaded to ${file.path}');
-      }
-      FileUtils.openPdf(file.path);
-    }).onError((e, stackTrace){
-      if(context.mounted){
-        CustomSnackBar.showErrorNotification(context, e.toString());
-      }
-    });
+    return ref.read(fileUtilsProvider)
+        .writeFile(await pdf.save(), fileName)
+        .then((file){
+          debugPrint('File exported to $file');
+          if(context.mounted){
+            CustomSnackBar.showSuccessNotification(context, 'File downloaded to ${file.path}');
+          }
+          ref.read(fileUtilsProvider).openPdf(file.path);
+        }).onError((e, stackTrace){
+          debugPrint(stackTrace.toString());
+          if(context.mounted){
+            CustomSnackBar.showErrorNotification(context, e.toString());
+          }
+        });
   }
 
   void reset(){

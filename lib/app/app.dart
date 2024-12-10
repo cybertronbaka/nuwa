@@ -2,6 +2,7 @@ library nuwa_assignment_app;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nuwa_assignment/misc/blue_plus_mockable.dart';
 import 'package:nuwa_assignment/pages/connect/page.dart';
 import 'package:nuwa_assignment/pages/entry/page.dart';
 import 'package:nuwa_assignment/pages/write/page.dart';
@@ -23,8 +24,9 @@ class NuwaAssignmentApp extends StatelessWidget{
 
     return ProviderScope(
       overrides: [
+        flutterBluePlusProvider.overrideWith((ref) => FlutterBluePlusMockable()),
         pencilRepoProvider.overrideWith((ref) =>
-          mockModeEnabled ? FakePencilRepository() : BluetoothPencilRepository()
+          mockModeEnabled ? FakePencilRepository(ref) : BluetoothPencilRepository(ref)
         )
       ],
       child: MaterialApp(

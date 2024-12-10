@@ -45,6 +45,7 @@ class WritePage extends ConsumerWidget{
           )
         ],
       ),
+      bottomNavigationBar: const Footer(),
     );
   }
 }

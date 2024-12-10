@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-abstract class FileUtils{
-  static Future<File> writeFile(Uint8List data, String name) async {
+final fileUtilsProvider = Provider((_)=>FileUtils());
+
+class FileUtils{
+  Future<File> writeFile(Uint8List data, String name) async {
     // storage permission ask
     var status = await Permission.storage.status;
     if (!status.isGranted) {
@@ -22,7 +25,7 @@ abstract class FileUtils{
     return File(filePath).writeAsBytes(buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
   }
 
-  static void openPdf(String filePath){
+  void openPdf(String filePath){
     const types = {".pdf": "application/pdf"};
     openOtherTypeFile() async {
       await OpenFile.open(filePath, type: types['.pdf']);

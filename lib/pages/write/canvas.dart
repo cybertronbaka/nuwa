@@ -79,6 +79,7 @@ class _Canvas extends ConsumerWidget{
     final points = ref.watch(pointsProvider);
 
     return SizedBox(
+      key: const Key('Canvas'),
       height: height,
       width: width,
       child: CustomPaint(

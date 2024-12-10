@@ -23,6 +23,7 @@ class _CanvasSection extends ConsumerWidget{
                   )
               ),
               ElevatedButton(
+                  key: const Key('exportToPDF'),
                   onPressed: (){
                     controller.exportPdf(context);
                   },

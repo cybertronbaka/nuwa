@@ -22,6 +22,7 @@ class _TextSection extends ConsumerWidget{
                 )
               ),
               ElevatedButton(
+                key: const Key('refreshBtn'),
                 onPressed: (){
                   controller.reset();
                 },
@@ -46,6 +47,7 @@ class _TextSection extends ConsumerWidget{
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: text == null ? const ConnectingIndicator() : Text(
+                  key: const Key('generatedText'),
                   text,
                   style: const TextStyle(
                     fontFamily: 'AllRoundGothic',
