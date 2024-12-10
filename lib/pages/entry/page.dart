@@ -1,18 +1,25 @@
 library entry_page;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nuwa_assignment/app/app.dart';
+import 'package:nuwa_assignment/misc/gaps.dart';
+import 'package:nuwa_assignment/widgets/widgets.dart';
 
-class EntryPage extends ConsumerWidget{
+part 'entry_card.dart';
+
+class EntryPage extends StatelessWidget{
   const EntryPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: const Center(
-        child: Text('HI'),
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      appBar: CustomAppBar(),
+      body: Center(
+        child: SingleChildScrollView(
+          child: _EntryCard(),
+        ),
       ),
+      bottomNavigationBar: Footer(),
     );
   }
 }
