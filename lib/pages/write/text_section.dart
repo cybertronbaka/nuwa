@@ -3,7 +3,8 @@ part of 'page.dart';
 class _TextSection extends ConsumerWidget{
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const text = 'Lorem';
+    final controller = ref.read(writeControllerProvider);
+    final text = ref.watch(randomWordProvider);
 
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -42,14 +43,14 @@ class _TextSection extends ConsumerWidget{
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                    text,
-                    style: TextStyle(
-                      fontFamily: 'AllRoundGothic',
-                      fontSize: 32,
-                      fontWeight: FontWeight.w600,
-                    )
-                ),
+                child: text == null ? const ConnectingIndicator() : Text(
+                  text,
+                  style: const TextStyle(
+                    fontFamily: 'AllRoundGothic',
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                  )
+              ),
               ),
             ),
           )
