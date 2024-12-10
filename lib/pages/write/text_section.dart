@@ -22,7 +22,9 @@ class _TextSection extends ConsumerWidget{
                 )
               ),
               ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+                  controller.reset();
+                },
                 child: const Row(
                   children: [
                     Icon(Icons.refresh_rounded, size: 18),
