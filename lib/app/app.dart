@@ -6,7 +6,6 @@ import 'package:nuwa_assignment/pages/connect/page.dart';
 import 'package:nuwa_assignment/pages/entry/page.dart';
 import 'package:nuwa_assignment/pages/write/page.dart';
 import 'package:nuwa_assignment/repositories/pencil_repository/pencil_repository.dart';
-import 'package:nuwa_assignment/states/states.dart';
 
 part 'router.dart';
 part 'routes.dart';
@@ -20,7 +19,7 @@ class NuwaAssignmentApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    const mockModeEnabled = true;
+    const mockModeEnabled = false;
 
     return ProviderScope(
       overrides: [

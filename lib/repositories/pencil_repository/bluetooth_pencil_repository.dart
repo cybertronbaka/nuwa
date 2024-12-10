@@ -11,8 +11,8 @@ class BluetoothPencilRepository extends PencilRepository{
     FlutterBluePlus.scanResults.listen((List<ScanResult> results) {
       for (final result in results) {
         final device = result.device;
-        if (!scannedDevices.contains(device) && device.localName.isNotEmpty) {
-          print('******${device.advName}');
+        if (!scannedDevices.contains(device)) {
+          debugPrint('******${device.advName}');
           scannedDevices.add(device);
         }
       }
@@ -21,9 +21,9 @@ class BluetoothPencilRepository extends PencilRepository{
     await FlutterBluePlus.startScan();
     await Future.delayed(const Duration(seconds: 15));
     await FlutterBluePlus.stopScan();
-    print('stopped');
+    debugPrint('stopped');
     for(var device in scannedDevices){
-      print('******${device.advName}');
+      debugPrint('******${device.advName}');
     }
     /// Leaving this for future
   }

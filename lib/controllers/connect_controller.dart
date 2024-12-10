@@ -11,10 +11,10 @@ class ConnectController{
     final statusNotifier = ref.read(pencilConnectionStatusProvider.notifier);
     statusNotifier.state = PencilConnectionStatus.connecting;
     return ref.read(pencilRepoProvider).connect().then((_){
-      print('Connected');
+      debugPrint('Connected');
       statusNotifier.state = PencilConnectionStatus.connected;
     }).onError((e, stacktrace){
-      print('Failed to connect');
+      debugPrint('Failed to connect');
       statusNotifier.state = PencilConnectionStatus.disconnected;
       if(context.mounted){
         CustomSnackBar.showErrorNotification(context, e.toString());
