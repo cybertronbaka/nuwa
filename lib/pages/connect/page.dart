@@ -20,12 +20,9 @@ class ConnectPage extends ConsumerWidget{
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final state = await ref.read(pencilRepoProvider).state();
-      state.listen((data){
-        ref.read(bluetoothStateProvider.notifier).state = data;
-      });
-    });
+    final controller = ref.read(connectControllerProvider);
+    
+    controller.init();
 
     return const Scaffold(
       appBar: CustomAppBar(),

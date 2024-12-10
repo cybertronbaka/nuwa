@@ -19,7 +19,7 @@ class NuwaAssignmentApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    const mockModeEnabled = false;
+    const mockModeEnabled = true;
 
     return ProviderScope(
       overrides: [
@@ -34,7 +34,8 @@ class NuwaAssignmentApp extends StatelessWidget{
         title: 'Nuwa Assignment',
         debugShowCheckedModeBanner: false,
         theme: NuwaTheme.data,
-        routes: router,
+        home: WritePage(),
+        // routes: router,
       )
     );
   }

@@ -86,6 +86,7 @@ extension PencilConnectionStatusExt on PencilConnectionStatus{
 
   void Function(BuildContext context, WidgetRef ref)? get action => switch(this){
     PencilConnectionStatus.disconnected => (context, ref) => ref.read(connectControllerProvider).connect(context),
-    _ => (context, ref) => ref.read(connectControllerProvider).navigateToWrite(context)
+    PencilConnectionStatus.connected => (context, ref) => ref.read(connectControllerProvider).navigateToWrite(context),
+    _ => null
   };
 }

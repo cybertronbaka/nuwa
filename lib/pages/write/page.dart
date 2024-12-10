@@ -1,6 +1,17 @@
 library write_page;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nuwa_assignment/app/app.dart';
+import 'package:nuwa_assignment/misc/gaps.dart';
+import 'package:nuwa_assignment/models/models.dart';
+import 'package:nuwa_assignment/states/states.dart';
+
+part 'canvas_section.dart';
+part 'header.dart';
+part 'connection_status.dart';
+part 'text_section.dart';
 
 class WritePage extends StatelessWidget{
   const WritePage({super.key});
@@ -9,9 +20,30 @@ class WritePage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(
-        child: Text('HI'),
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            backgroundColor: NuwaColors.white,
+            pinned: true,
+            automaticallyImplyLeading: false,
+            toolbarHeight: 80,
+            leadingWidth: 0,
+            title: _Header()
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _TextSection(),
+                  _CanvasSection(),
+                ],
+              )
+            ]),
+          )
+        ],
       ),
     );
   }
 }
+

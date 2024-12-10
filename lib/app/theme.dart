@@ -13,6 +13,21 @@ abstract class NuwaTheme{
         color: NuwaColors.black
       ),
       scaffoldBackgroundColor: NuwaColors.bg,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          textStyle: const TextStyle(
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.w600,
+              fontSize: 18
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+          backgroundColor: NuwaColors.white,
+          foregroundColor: NuwaColors.black,
+        )
+      ),
       filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
               textStyle: const TextStyle(
