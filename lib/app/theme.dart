@@ -5,9 +5,18 @@ abstract class NuwaTheme{
       fontFamily: 'Inter',
       primaryColor: NuwaColors.primary,
       useMaterial3: false,
+      textTheme: const TextTheme().apply(
+        fontFamily: 'Inter',
+        bodyColor: NuwaColors.black
+      ),
+      iconTheme: const IconThemeData(
+        color: NuwaColors.black
+      ),
+      scaffoldBackgroundColor: NuwaColors.bg,
       filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
               textStyle: const TextStyle(
+                fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
                 fontSize: 20
               ),

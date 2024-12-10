@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nuwa_assignment/pages/connect/page.dart';
 import 'package:nuwa_assignment/pages/entry/page.dart';
 import 'package:nuwa_assignment/pages/write/page.dart';
+import 'package:nuwa_assignment/repositories/pencil_repository/pencil_repository.dart';
+import 'package:nuwa_assignment/states/states.dart';
 
 part 'router.dart';
 part 'routes.dart';
@@ -18,7 +20,14 @@ class NuwaAssignmentApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    const mockModeEnabled = true;
+
     return ProviderScope(
+      overrides: [
+        pencilRepoProvider.overrideWith((ref) =>
+          mockModeEnabled ? FakePencilRepository() : BluetoothPencilRepository()
+        )
+      ],
       child: MaterialApp(
         scrollBehavior:  ScrollConfiguration.of(context).copyWith(
           physics: const BouncingScrollPhysics(),
@@ -27,7 +36,7 @@ class NuwaAssignmentApp extends StatelessWidget{
         debugShowCheckedModeBanner: false,
         theme: NuwaTheme.data,
         routes: router,
-      ),
+      )
     );
   }
 }
