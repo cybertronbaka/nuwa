@@ -10,6 +10,7 @@ import 'package:nuwa_assignment/models/models.dart';
 import 'package:nuwa_assignment/states/states.dart';
 import 'package:nuwa_assignment/widgets/widgets.dart';
 
+part 'canvas.dart';
 part 'canvas_section.dart';
 part 'header.dart';
 part 'connection_status.dart';
@@ -25,7 +26,7 @@ class WritePage extends ConsumerWidget{
     controller.init();
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const CustomAppBar(),
       body: CustomScrollView(
         slivers: [
           const SliverAppBar(
@@ -38,13 +39,8 @@ class WritePage extends ConsumerWidget{
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _TextSection(),
-                  _CanvasSection(),
-                ],
-              )
+              _TextSection(),
+              _CanvasSection(),
             ]),
           )
         ],

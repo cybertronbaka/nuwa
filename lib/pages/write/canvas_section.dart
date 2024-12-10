@@ -3,6 +3,9 @@ part of 'page.dart';
 class _CanvasSection extends ConsumerWidget{
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.read(writeControllerProvider);
+    ref.watch(canvasSizeProvider);
+    ref.watch(prevCanvasSizeProvider);
 
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -20,7 +23,9 @@ class _CanvasSection extends ConsumerWidget{
                   )
               ),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    controller.exportPdf(context);
+                  },
                   child: const Row(
                     children: [
                       Icon(Icons.download, size: 18),
@@ -38,11 +43,12 @@ class _CanvasSection extends ConsumerWidget{
               color: NuwaColors.white,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Container(),
-              ),
+            child: LayoutBuilder(
+              builder: (_, constraints){
+                return _CanvasWrapper(
+                  size: Size(constraints.maxWidth, 300),
+                );
+              },
             ),
           )
         ],

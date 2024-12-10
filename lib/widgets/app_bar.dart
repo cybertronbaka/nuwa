@@ -7,6 +7,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: preferredSize.height,
+      automaticallyImplyLeading: false,
       title: Image.asset(
         'assets/images/logo.png',
         height: 48,

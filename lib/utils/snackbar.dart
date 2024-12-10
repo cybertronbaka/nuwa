@@ -36,7 +36,12 @@ class CustomSnackBar {
             color: Colors.white,
           ),
           const SizedBox(width: 10),
-          Text(capsule.message, overflow: TextOverflow.ellipsis)
+          Expanded(child: Text(
+              capsule.message,
+              softWrap: true,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis
+          ))
         ],
       ),
       duration: Duration(seconds: capsule.durationInSeconds),

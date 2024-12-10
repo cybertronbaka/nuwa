@@ -18,11 +18,27 @@ class WriteController{
   }
 
   void _clearCanvas(){
-    ref.read(randomWordProvider.notifier).state = WordGenerator.generate();
+    ref.read(pointsProvider.notifier).state = [];
   }
 
-  Future<void> exportPdf() async {
+  Future<void> exportPdf(BuildContext context) async {
+    final now = DateTime.now();
+    final canvasSize = ref.read(canvasSizeProvider)!;
+    final points = ref.read(pointsProvider);
 
+    final pdf = PdfGenerator.generate(canvasSize, points);
+    final fileName = '${now.day}-${now.month}-${now.year} ${now.hour}-${now.minute}-${now.second}.pdf';
+    return FileUtils.writeFile(await pdf.save(), fileName).then((file){
+      debugPrint('File exported to $file');
+      if(context.mounted){
+        CustomSnackBar.showSuccessNotification(context, 'File downloaded to ${file.path}');
+      }
+      FileUtils.openPdf(file.path);
+    }).onError((e, stackTrace){
+      if(context.mounted){
+        CustomSnackBar.showErrorNotification(context, e.toString());
+      }
+    });
   }
 
   void reset(){

@@ -34,8 +34,7 @@ class NuwaAssignmentApp extends StatelessWidget{
         title: 'Nuwa Assignment',
         debugShowCheckedModeBanner: false,
         theme: NuwaTheme.data,
-        home: WritePage(),
-        // routes: router,
+        routes: router,
       )
     );
   }
