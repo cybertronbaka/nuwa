@@ -19,12 +19,9 @@ class _ConnectionContent extends ConsumerWidget{
 
     return Column(
       children: [
-        Container(
-          padding: const EdgeInsets.all(28),
-          decoration: BoxDecoration(
-              color: connectionStatus.iconBgColor,
-              borderRadius: BorderRadius.circular(5000)
-          ),
+        CircleAvatar(
+          backgroundColor: connectionStatus.iconBgColor,
+          radius: 50,
           child: connectionStatus.icon(),
         ),
         mediumGap,
@@ -73,7 +70,7 @@ extension PencilConnectionStatusExt on PencilConnectionStatus{
 
   Widget icon() => switch(this){
     PencilConnectionStatus.disconnected => const Icon(CupertinoIcons.pen, size: 32,),
-    PencilConnectionStatus.connecting => Container(),
+    PencilConnectionStatus.connecting => const ConnectingIndicator(),
     PencilConnectionStatus.connected => const Icon(CupertinoIcons.pen, size: 32, color: NuwaColors.primary)
   };
 
